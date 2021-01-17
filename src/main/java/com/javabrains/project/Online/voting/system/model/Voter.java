@@ -28,6 +28,8 @@ public class Voter {
     @NotBlank(message = "can not be blank")
     private String email;
     @NotBlank(message = "can not be blank")
+    private String password;
+    @NotBlank(message = "can not be blank")
     private String place;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @NotNull
