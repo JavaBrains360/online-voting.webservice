@@ -1,6 +1,8 @@
 package com.javabrains.project.Online.voting.system.controller;
 
 import com.javabrains.project.Online.voting.system.model.LoginDetails;
+
+import com.javabrains.project.Online.voting.system.security.JwtProvider;
 import com.javabrains.project.Online.voting.system.service.VoterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +17,13 @@ public class LoginController {
     @Autowired
     private VoterService voterService;
 
+    @Autowired
+    private JwtProvider jwtProvider;
+
     @PostMapping("/voter")
-    public void loginVoter(@RequestBody LoginDetails loginDetails){
+    public String loginVoter(@RequestBody LoginDetails loginDetails){
         voterService.loginVoter(loginDetails);
+        String token = jwtProvider.generateToken(loginDetails.getEmail());
+        return token;
     }
 }
