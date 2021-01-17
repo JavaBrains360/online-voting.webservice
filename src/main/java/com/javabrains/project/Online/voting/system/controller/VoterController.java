@@ -1,6 +1,7 @@
 package com.javabrains.project.Online.voting.system.controller;
 
 import com.javabrains.project.Online.voting.system.model.Voter;
+import com.javabrains.project.Online.voting.system.service.MailService;
 import com.javabrains.project.Online.voting.system.service.VoterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,14 @@ public class VoterController {
     @Autowired
     private VoterService voterService;
 
+    @Autowired
+    private MailService mailService;
+
     @PostMapping("/register")
     public ResponseEntity<Voter> registerVoter(@RequestBody Voter voter){
         log.info("Going to register voter with details {}"+ voter);
         Voter savedVoter = voterService.registerVoter(voter);
+        mailService.sendMail(voter);
         return new ResponseEntity<>(savedVoter, HttpStatus.CREATED);
     }
 }
