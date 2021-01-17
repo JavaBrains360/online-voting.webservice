@@ -36,7 +36,5 @@ public class VoterService {
         }
     }
 
-    public Voter getVoterDetailsBuEmail(String email){
-        return voterRepository.findByEmail(email).get();
-    }
+ 
 }
