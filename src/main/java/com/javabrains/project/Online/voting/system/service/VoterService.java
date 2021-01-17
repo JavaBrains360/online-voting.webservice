@@ -31,8 +31,6 @@ public class VoterService {
     public void loginVoter(LoginDetails loginDetails) {
         Optional<Voter> voter = voterRepository.findByEmail(loginDetails.getEmail());
 
-        encoder.matches(loginDetails.getPassword(),voter.get().getPassword());
-
         if(encoder.matches(loginDetails.getPassword(),voter.get().getPassword())){
            log.info("Login successfull");
         }
